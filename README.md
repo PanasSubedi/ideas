@@ -1,70 +1,75 @@
-# Getting Started with Create React App
+# My Ideas
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+1. [Introduction](#introduction)
+2. [Getting Started](#getting-started)
+3. [Usage](#usage)
+4. [Screenshots](#screenshots)
+5. [Known Issue](#known-issue)
+6. [Dependencies](#dependencies)
+7. [Technical Notes](#technical-notes)
 
-## Available Scripts
+## Introduction
 
-In the project directory, you can run:
+My Ideas is a small project based on James Altucher's [Ultimate Guide for becoming an Idea Machine](https://jamesaltucher.com/blog/the-ultimate-guide-for-becoming-an-idea-machine/).
 
-### `yarn start`
+Using the application, you can:
+1. Add one title for each day.
+2. Under each title, you can at up to 20 ideas.
+3. Add tags to titles.
+4. Import and Export ideas as JSON.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Getting Started
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+1. Clone the repo
 
-### `yarn test`
+2. In the project directory, install all the dependencies using:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+  `yarn`
 
-### `yarn build`
+3. Run the project using:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+  `yarn start`
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+The app runs on http://localhost:3000.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Usage
 
-### `yarn eject`
+The home page opens with the current day's title. Here, you can:
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+1. Edit the **Title**.
+2. Add/Edit/Delete **Ideas**.
+3. Add/Edit/Delete **Tags**.
+4. Select a **Tag** to see all the titles associated with the tag.
+  - Click a title to go back to the ideas page.
+5. Edit the **Date** to display the Calendar.
+  - Select a date to go back to the ideas page.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Screenshots
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+1. Home page
+![Home Page](screenshots/homepage.png)
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+2. Calendar
+![Calendar](screenshots/calendar.png)
 
-## Learn More
+3. Import and export ideas
+![Import and Export ideas](screenshots/importexport.png)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Known Issue
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+1. Clicking on the **Edit** and **Delete** icons don't work as expected. You have to click on the button but not on the icon to make them work.
 
-### Code Splitting
+## Dependencies
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+1. @material-ui/core ^4.11.1
+2. @material-ui/icons ^4.11.2
+3. date-fns ^1.30.1
+4. react-material-ui-calendar ^0.2.3
 
-### Analyzing the Bundle Size
+## Technical Notes
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+1. The app uses browser's local storage to store the ideas. So make sure to export your ideas before clearing browser data.
 
-### Making a Progressive Web App
+2. You can edit the functions inside `src/helpers/storage.js` to implement data storage using API, database, or files.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+3. Importing ideas deletes the ideas existing on the website. So, make sure to backup existing ideas before importing new ones. Feature to merge multiple exports coming soon.
