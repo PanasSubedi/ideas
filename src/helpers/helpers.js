@@ -1,6 +1,21 @@
 import { getAllIdeas, updateIdea, getNewID } from './storage';
 
 function getTitlesByTag(reqTag) {
+  /**
+  * Returns a list of all the Idea Objects (with date, title, tags, and ideas)
+  * containing a specific tag.
+  *
+  * params - reqTag:string
+  *
+  * Output format: array(
+  *   {
+  *     date:string,
+  *     title:string,
+  *     tags:array({id:string, tag:string, tagEdit:boolean}),
+  *     ideas: arrat(id:string, idea:string, ideaEdit:boolean)
+  *   }
+  * )
+  */
   const ideas = getAllIdeas();
 
   return ideas.filter(idea => {
@@ -16,6 +31,14 @@ function getTitlesByTag(reqTag) {
 }
 
 function importJSON(){
+  /**
+  * Creates an input file element, triggers it, and stores all the data
+  * in the input file in the application
+  *
+  * params - None
+  *
+  * Output format - None
+  */
 
   alert('Importing will wipe your current data. Click Cancel on the Upload window to stop the process.')
 
@@ -29,6 +52,7 @@ function importJSON(){
 
       ideas.forEach(idea => {
 
+        // for each idea, create the idea object and add to the storage
         updateIdea({
           date: idea.date,
           title: idea.title,
@@ -63,6 +87,13 @@ function importJSON(){
 }
 
 function downloadFile(filename, data){
+  /**
+  * Download given data
+  *
+  * params:
+  *   filename - output file name
+  *   data - data to add to the file
+  */
   const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(data))
   const downloadAnchorNode = document.createElement('a');
 
@@ -74,6 +105,9 @@ function downloadFile(filename, data){
 }
 
 function exportAsJSON(exportName){
+  /**
+  * export all the ideas in the storage
+  */
   const allIdeas = getAllIdeas();
   allIdeas.forEach(idea => {
 
@@ -86,6 +120,12 @@ function exportAsJSON(exportName){
 }
 
 function getDateData(dateString){
+  /**
+  * return idea object for the provided date
+  *
+  * params:
+  *   dateString - JS Date object converted to string using toDateString()
+  */
 
   const dataToReturn = getAllIdeas().filter(idea => idea.date === dateString)
   if (dataToReturn.length === 0){

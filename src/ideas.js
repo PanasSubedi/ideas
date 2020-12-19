@@ -39,21 +39,31 @@ const titleLimit = 75
 
 function Ideas() {
 
+  // primary variables
   const [date, setDate] = useState(new Date(initialData.date));
   const [title, setTitle] = useState(initialData.title);
   const [tags, setTags] = useState(initialData.tags);
   const [ideas, setIdeas] = useState(initialData.ideas);
-  const [tagSearchResults, setTagSearchResults] = useState([]);
 
+  // to store and display the search results after user clicks a tag
+  const [tagSearchResults, setTagSearchResults] = useState([]);
+  const [displayTagSearchResults, setDisplayTagSearchResults] = useState(false);
+
+  // display corresponding textbox if these variables are set to true
   const [editingTag, setEditingTag] = useState(false);
   const [editingIdea, setEditingIdea] = useState(false);
   const [editingTitle, setEditingTitle] = useState(false);
+
+  // display icon only if user isn't editing title
   const [editTitleIconDisplay, setEditTitleIconDisplay] = useState(true);
 
+  // to display calendar
   const [displayCalendar, setDisplayCalendar] = useState(false);
-  const [displayTagSearchResults, setDisplayTagSearchResults] = useState(false);
 
+  // required while switching views from Calendar to a single title (date)
   const [needsDataUpdate, setNeedsDataUpdate] = useState(true);
+
+  // for import export menu
   const [menuOpen, setMenuOpen] = useState(false);
 
   const classes = useStyles();
@@ -71,6 +81,7 @@ function Ideas() {
     }
 
     if(needsDataUpdate) {
+      // required while switching views from Calendar to a single title (date)
       updateIdea(dateData);
     }
 
@@ -84,7 +95,9 @@ function Ideas() {
   const handleCalendarSelection = value => {
     const newDateData = getDateData(value.toDateString());
 
+
     setNeedsDataUpdate(false);
+    // to stop useEffect from changing values mid process
 
     setDate(value);
     setTitle(newDateData.title);
@@ -118,6 +131,8 @@ function Ideas() {
       setTags(prevTags => {
         let newTags = [];
         prevTags.forEach(tag => {
+
+          // set tagEdit to false to stop displaying the textfield
           if (tag.tagEdit){
             tag.tagEdit = false
           }
@@ -180,6 +195,8 @@ function Ideas() {
       setIdeas(prevIdeas => {
         let newIdeas = [];
         prevIdeas.forEach(idea => {
+
+          // set ideaEdit to false to stop displaying the textfield
           if (idea.ideaEdit){
             idea.ideaEdit = false;
           }
@@ -228,6 +245,8 @@ function Ideas() {
     setIdeas(prevIdeas => {
       let newIdeas = []
       prevIdeas.forEach(idea => {
+
+        // set ideaEdit to true to display the textfield
         if (idea.id === editingIdeaID) {
           idea.ideaEdit = true
         }
@@ -240,6 +259,9 @@ function Ideas() {
   }
 
   const getIdeaContent = (idea, index) => {
+
+    // display TextField if idea is being edited
+    // else display normal text
     if (idea.ideaEdit){
       return (
         <TextField
@@ -283,6 +305,7 @@ function Ideas() {
     else {
       setEditingIdea(true);
       setIdeas( prevIdeas => {
+        // add new idea with default value and set editing to true
         return [ ...prevIdeas, {id:getNewID('idea'), idea:'', ideaEdit:true} ]
       })
     }
@@ -292,6 +315,8 @@ function Ideas() {
 
   const getTitleContent = () => {
 
+    // display TextField if title is being edited
+    // else display normal text
     if (editingTitle) {
       return (
         <TextField
@@ -332,6 +357,7 @@ function Ideas() {
     else {
       setEditingTag(true);
       setTags( prevTags => {
+        // add new tag and set editing to true
         return [ ...prevTags, {id:getNewID('tag'), tag:'', tagEdit:true} ]
       })
     }
@@ -340,6 +366,8 @@ function Ideas() {
   }
 
   const getTagChip = tag => {
+    // display TextField if tag is being edited
+    // else display normal text
     if (tag.tagEdit){
       return (
         <TextField

@@ -30,9 +30,10 @@ function getNewID(element){
 
 function updateIdea(dateData){
   /******
-    Takes all the data for a single date and adds it to the storage.
+    Takes an idea object and adds it to the storage.
 
     Param: dateData - object
+
     Param example: {
       date: dateString,
       title: title,
@@ -63,6 +64,9 @@ function updateIdea(dateData){
 }
 
 function getAllIdeas(){
+  /**
+  * Returns an array of all the idea objects in storage
+  */
   const ideas = localStorage.getItem('ideas')
   if (ideas == null){
     return [];
