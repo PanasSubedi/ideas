@@ -117,13 +117,10 @@ function Ideas() {
     setTagSearchResults(getTitlesByTag(tag));
   }
 
-  const handleTagDelete = event => {
-    const currentTagID = event.target.parentElement.parentElement.id;
+  const handleTagDelete = tagID => {
     setTags(prevTags => {
-      return prevTags.filter(tag => tag.id !== currentTagID)
+      return prevTags.filter(tag => tag.id !== tagID)
     })
-
-    event.preventDefault()
   }
 
   const handleTagValueKeyDown = event => {
@@ -230,16 +227,13 @@ function Ideas() {
     }
   }
 
-  const handleIdeaDelete = event => {
-    const deleteIdeaID = event.target.id;
+  const handleIdeaDelete = ideaID => {
     setIdeas(prevIdeas => {
-      return prevIdeas.filter(idea => idea.id !== deleteIdeaID)
+      return prevIdeas.filter(idea => idea.id !== ideaID)
     })
-    event.preventDefault();
   }
 
-  const handleIdeaEditKey = event => {
-    const editingIdeaID = event.target.id;
+  const handleIdeaEditKey = ideaID => {
 
     setEditingIdea(true);
     setIdeas(prevIdeas => {
@@ -247,7 +241,7 @@ function Ideas() {
       prevIdeas.forEach(idea => {
 
         // set ideaEdit to true to display the textfield
-        if (idea.id === editingIdeaID) {
+        if (idea.id === ideaID) {
           idea.ideaEdit = true
         }
         newIdeas.push(idea)
@@ -255,7 +249,6 @@ function Ideas() {
       return newIdeas;
     })
 
-    event.preventDefault();
   }
 
   const getIdeaContent = (idea, index) => {
@@ -281,12 +274,24 @@ function Ideas() {
     else {
       return (
         <Typography key={idea.id} className={classes.lines}>
-          {index+1}. {idea.idea}&nbsp;
-          <IconButton size='small' id={idea.id} className={classes.actionItems} onClick={handleIdeaEditKey} aria-label="edit">
-            <EditIcon id={idea.id} style={{fontSize:'100%'}} />&nbsp;
+          {index+1}. {idea.idea}
+
+          <IconButton
+            size='small'
+            className={classes.actionItems}
+            onClick={() => handleIdeaEditKey(idea.id)}
+            aria-label="edit"
+          >
+            <EditIcon style={{fontSize:'100%'}} />
           </IconButton>
-          <IconButton size='small' id={idea.id} className={classes.actionItems} onClick={handleIdeaDelete} aria-label="delete">
-            <DeleteIcon id={idea.id} style={{fontSize:'100%'}} />
+
+          <IconButton
+            size='small'
+            className={classes.actionItems}
+            onClick={() => handleIdeaDelete(idea.id)}
+            aria-label="delete"
+          >
+            <DeleteIcon style={{fontSize:'100%'}} />
           </IconButton>
         </Typography>
       )
@@ -388,11 +393,10 @@ function Ideas() {
         <Chip
           variant='outlined'
           key={tag.id}
-          id={tag.id}
           label={tag.tag}
           className={classes.tags}
           size='small'
-          onDelete={handleTagDelete}
+          onDelete={() => handleTagDelete(tag.id)}
           onClick={() => handleTagClick(tag.tag)}
         />
       )
