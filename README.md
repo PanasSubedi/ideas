@@ -4,9 +4,8 @@
 2. [Getting Started](#getting-started)
 3. [Usage](#usage)
 4. [Screenshots](#screenshots)
-5. [Known Issue](#known-issue)
-6. [Dependencies](#dependencies)
-7. [Technical Notes](#technical-notes)
+5. [Dependencies](#dependencies)
+6. [Technical Notes](#technical-notes)
 
 ## Introduction
 
@@ -14,7 +13,7 @@ My Ideas is a small project based on James Altucher's [Ultimate Guide for becomi
 
 Using the application, you can:
 1. Add one title for each day.
-2. Under each title, you can at up to 20 ideas.
+2. Under each title, you can add up to 20 ideas.
 3. Add tags to titles.
 4. Import and Export ideas as JSON.
 
@@ -54,10 +53,6 @@ The home page opens with the current day's title. Here, you can:
 
 3. Import and export ideas
 ![Import and Export ideas](screenshots/importexport.png)
-
-## Known Issue
-
-1. Clicking on the **Edit** and **Delete** icons don't work as expected. You have to click on the button but not on the icon to make them work.
 
 ## Dependencies
 
